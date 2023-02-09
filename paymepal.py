@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,session
 from sqlalchemy import create_engine
 
+
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "very secret stuff"
 engine = create_engine("sqlite:///paymepal.db")
 
 @app.route("/")
@@ -17,6 +19,8 @@ def login():
         
         result = connection.execute(query)
         for row in result:
+            session["username"] = username
+            session["user_id"] = rows[0][0]
             if username == row[0] and password == row[1]:
                 return render_template("private.html")
             else:
