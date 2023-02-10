@@ -1,16 +1,15 @@
 #%%
 
-import sqlalchemy as sa
+import sqlalchemy
 
-engine = sa.create_engine("sqlite:///paymepal.db")
-
+engine = sqlalchemy.create_engine("sqlite:///paymepal.db")
 
 with engine.connect() as connection:
-    query = "SELECT * FROM users"
-    result = connection.execute(query)
-    for user in result:
-        print(result[2])
-    
+    query = "SELECT * FROM transactions;"
 
+    result = connection.execute(query)
+
+    for row in result:
+        print(row)
 
 # %%
