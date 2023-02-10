@@ -25,6 +25,14 @@ def login():
                 return render_template("private.html")
             else:
                 return render_template("unauthorized.html"), 403
+            
+@app.route("/admin")
+def admin():
+    return "OK"
+
+@app.route("/unauthorized")
+def unauthorized():
+    return render_template()
 
 
 app.run(debug=True, port=8080)
